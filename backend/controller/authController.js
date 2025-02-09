@@ -101,7 +101,7 @@ const authController = {
         // 4. return response
         const userLoginSchema = Joi.object({
             username: Joi.string().min(5).max(30).required(),
-            password: Joi.string().pattern(passwordPattern)
+            password: Joi.string().pattern(passwordPattern).required()
         });
 
         const {error} = userLoginSchema.validate(req.body);
@@ -149,7 +149,7 @@ const authController = {
         try {
             
             await RefreshToken.updateOne({
-                _id: i=user._id
+                _id : user._id
             },
             {token: refreshToken},
             {upsert: true}
